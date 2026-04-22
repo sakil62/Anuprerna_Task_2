@@ -10,7 +10,7 @@ export default function Pagination({ page, total, limit, onChange }) {
       <button
         onClick={() => onChange(page - 1)}
         disabled={page === 1}
-        className="text-ink-700 hover:text-volt disabled:opacity-20 transition-colors"
+        className="text-[#8B6A3D]/70 hover:text-[#8B6A3D] disabled:opacity-20 transition-colors"
       >
         Prev
       </button>
@@ -20,13 +20,13 @@ export default function Pagination({ page, total, limit, onChange }) {
           const gap = i > 0 && p - arr[i - 1] > 1;
           return (
             <span key={p} className="flex items-center gap-4">
-              {gap && <span className="text-ink-600/30">...</span>}
+              {gap && <span className="text-[#8B6A3D]/30">...</span>}
               <button
                 onClick={() => onChange(p)}
                 className={`transition-all duration-300 ${
                   p === page 
-                    ? "text-ink-950 font-bold border-b border-volt" 
-                    : "text-ink-700 hover:text-volt"
+                    ? "text-[#8B6A3D] font-bold border-b border-[#8B6A3D]" 
+                    : "text-[#8B6A3D]/70 hover:text-[#8B6A3D]"
                 }`}
               >
                 {String(p).padStart(2, '0')}
@@ -39,7 +39,7 @@ export default function Pagination({ page, total, limit, onChange }) {
       <button
         onClick={() => onChange(page + 1)}
         disabled={page === totalPages}
-        className="text-ink-700 hover:text-volt disabled:opacity-20 transition-colors"
+        className="text-[#8B6A3D]/70 hover:text-[#8B6A3D] disabled:opacity-20 transition-colors"
       >
         Next
       </button>

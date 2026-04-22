@@ -27,48 +27,63 @@ export default function PostForm({ post, onSuccess, onCancel }) {
   }
 
   return (
-    <div className="bg-[#FAFAF9] border border-ink-600/10 p-10 animate-in fade-in slide-in-from-bottom-4 duration-500">
-      <h3 className="font-display font-500 text-lg mb-10 text-ink-950 uppercase tracking-widest">
+    <div className="bg-[#FAFAF9] border border-[#8B6A3D]/20 p-10 animate-in fade-in slide-in-from-bottom-4 duration-500">
+      <h3 className="font-display font-500 text-lg mb-10 text-[#8B6A3D] uppercase tracking-widest">
         {editing ? "Edit Entry" : "Create New"}
       </h3>
 
       {result && (
-        <div className="mb-10 p-6 bg-ink-950 text-emerald-neon font-mono text-[10px] uppercase tracking-widest">
+        <div className="mb-10 p-6 bg-[#8B6A3D] text-white font-mono text-[10px] uppercase tracking-widest">
           {editing ? "Entry Updated" : "Entry Created"} · ID: {result.id}
         </div>
       )}
 
-      {error && <div className="mb-8"><ErrorState error={error} onRetry={() => setError(null)} /></div>}
+      {error && (
+        <div className="mb-8">
+          <ErrorState error={error} onRetry={() => setError(null)} />
+        </div>
+      )}
 
       <form onSubmit={submit} className="flex flex-col gap-8">
         <div className="group">
-          <label className="block font-mono text-[10px] uppercase tracking-[0.2em] text-ink-700 mb-2">Title</label>
+          <label className="block font-mono text-[10px] uppercase tracking-[0.2em] text-[#8B6A3D] mb-2">
+            Title
+          </label>
           <input
-            value={title} onChange={e => setTitle(e.target.value)}
-            className="w-full bg-transparent border-b border-ink-600/30 py-3 text-sm text-ink-950 placeholder-ink-600/50 focus:outline-none focus:border-volt transition-all"
+            value={title}
+            onChange={e => setTitle(e.target.value)}
+            className="w-full bg-transparent border-b border-[#8B6A3D]/40 py-3 text-sm text-ink-950 placeholder-ink-600/50 focus:outline-none focus:border-[#8B6A3D] transition-all"
             placeholder="Name your post..."
           />
         </div>
+
         <div className="group">
-          <label className="block font-mono text-[10px] uppercase tracking-[0.2em] text-ink-700 mb-2">Content</label>
+          <label className="block font-mono text-[10px] uppercase tracking-[0.2em] text-[#8B6A3D] mb-2">
+            Content
+          </label>
           <textarea
-            value={body} onChange={e => setBody(e.target.value)}
-            rows={4} 
-            className="w-full bg-transparent border-b border-ink-600/30 py-3 text-sm text-ink-950 placeholder-ink-600/50 focus:outline-none focus:border-volt transition-all resize-none"
+            value={body}
+            onChange={e => setBody(e.target.value)}
+            rows={4}
+            className="w-full bg-transparent border-b border-[#8B6A3D]/40 py-3 text-sm text-ink-950 placeholder-ink-600/50 focus:outline-none focus:border-[#8B6A3D] transition-all resize-none"
             placeholder="Write your story..."
           />
         </div>
         
         <div className="flex items-center gap-8 mt-4">
           <button
-            type="submit" disabled={loading}
-            className="text-[10px] uppercase tracking-widest text-ink-950 hover:text-volt transition-all font-bold"
+            type="submit"
+            disabled={loading}
+            className="text-[10px] uppercase tracking-widest text-[#8B6A3D] hover:text-[#6f532f] transition-all font-bold"
           >
             {loading ? "Processing..." : "Confirm & Save"}
           </button>
+
           {onCancel && (
-            <button type="button" onClick={onCancel}
-              className="text-[10px] uppercase tracking-widest text-ink-700 hover:text-ink-950 transition-all"
+            <button
+              type="button"
+              onClick={onCancel}
+              className="text-[10px] uppercase tracking-widest text-[#8B6A3D]/70 hover:text-[#8B6A3D] transition-all"
             >
               Cancel
             </button>

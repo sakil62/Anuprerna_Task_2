@@ -3,7 +3,6 @@ export default {
   content: ["./index.html", "./src/**/*.{js,jsx}"],
   theme: {
     extend: {
-      // ADD THESE FOR PREMIUM TYPOGRAPHY
       letterSpacing: {
         widest: '0.25em',
         tightest: '-0.02em',
@@ -25,7 +24,6 @@ export default {
         rose: { neon: "#9F1239" },
         emerald: { neon: "#15803D" },
       },
-      // ... keep your existing keyframes and animations
     },
   },
   plugins: [],

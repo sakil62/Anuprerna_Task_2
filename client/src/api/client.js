@@ -2,7 +2,7 @@ import axios from "axios";
 import { useChaosStore } from "../store/chaosStore";
 
 const BASE_URL = "http://localhost:4000/api";
-const TIMEOUT_MS = 5000; // client-side abort after 5s
+const TIMEOUT_MS = 5000;
 
 function getChaosParams() {
   const { forceTimeout, force404, force500, badUrl } = useChaosStore.getState();
@@ -28,7 +28,6 @@ async function request(method, path, { params = {}, data } = {}) {
     });
     return { data: response.data, error: null };
   } catch (err) {
-    // Aborted by our AbortController → timeout
     if (err.code === "ERR_CANCELED" || err.name === "CanceledError") {
       return { data: null, error: { type: "timeout", message: "Request timed out after 5 seconds." } };
     }
@@ -36,7 +35,6 @@ async function request(method, path, { params = {}, data } = {}) {
     if (!err.response) {
       return { data: null, error: { type: "network", message: "Cannot reach server. Check your connection or start the backend." } };
     }
-    // HTTP error with structured body
     const body = err.response.data;
     if (body?.errorType) {
       return { data: null, error: { type: body.errorType, message: body.message, status: body.status } };

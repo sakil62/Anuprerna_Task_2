@@ -3,7 +3,6 @@
 
 @layer base {
   body {
-    /* Larger, more premium base reading size */
     font-size: 16px; 
     line-height: 1.7;
     background-color: #FAFAF9; 
@@ -13,13 +12,11 @@
   }
 }
 
-/* Luxury Scrollbar */
 ::-webkit-scrollbar { width: 4px; }
 ::-webkit-scrollbar-track { background: #FAFAF9; }
 ::-webkit-scrollbar-thumb { background: #E7E5E4; }
 ::-webkit-scrollbar-thumb:hover { background: #CA8A04; }
 
-/* Premium Shimmer for Skeletons */
 .skel-line {
   background: linear-gradient(90deg, #F5F5F4 25%, #E7E5E4 50%, #F5F5F4 75%);
   background-size: 200% 100%;

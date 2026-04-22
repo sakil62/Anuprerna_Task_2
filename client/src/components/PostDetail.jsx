@@ -36,36 +36,64 @@ export default function PostDetail({ id, onClose }) {
   return (
     <div className="fixed inset-0 bg-ink-950/40 backdrop-blur-md flex items-center justify-center z-50 p-6" onClick={onClose}>
       <div 
-        className="bg-[#FAFAF9] border border-ink-600/10 shadow-[0_30px_60px_rgba(0,0,0,0.15)] w-full max-w-2xl max-h-[90vh] overflow-y-auto p-12 relative" 
+        className="bg-[#FAFAF9] border border-[#8B6A3D]/20 shadow-[0_30px_60px_rgba(0,0,0,0.15)] w-full max-w-2xl max-h-[90vh] overflow-y-auto p-12 relative" 
         onClick={e => e.stopPropagation()}
       >
         {/* Close Button */}
-        <button onClick={onClose} className="absolute top-8 right-8 text-ink-700 hover:text-ink-950 transition-colors uppercase text-[10px] tracking-widest">
+        <button 
+          onClick={onClose} 
+          className="absolute top-8 right-8 text-[#8B6A3D] hover:text-[#6f532f] transition-colors uppercase text-[10px] tracking-widest"
+        >
           Close ✕
         </button>
 
         {loading && (
-          <div className="py-24 text-center font-mono text-[10px] uppercase tracking-widest text-ink-700 animate-pulse">Loading Archive...</div>
+          <div className="py-24 text-center font-mono text-[10px] uppercase tracking-widest text-[#8B6A3D] animate-pulse">
+            Loading Archive...
+          </div>
         )}
 
         {!loading && error && <ErrorState error={error} onRetry={load} />}
 
         {!loading && deleted && (
           <div className="text-center py-24">
-            <p className="text-ink-950 font-display text-lg">Entry removed.</p>
-            <button onClick={onClose} className="mt-8 text-[10px] uppercase tracking-widest underline underline-offset-4 decoration-ink-600">Back to Collection</button>
+            <p className="text-[#8B6A3D] font-display text-lg">Entry removed.</p>
+            <button 
+              onClick={onClose} 
+              className="mt-8 text-[10px] uppercase tracking-widest underline underline-offset-4 decoration-[#8B6A3D]"
+            >
+              Back to Collection
+            </button>
           </div>
         )}
 
         {!loading && !error && !deleted && post && !editing && (
           <div className="animate-in fade-in duration-500">
-            <div className="font-mono text-[10px] tracking-[0.2em] text-ink-700 mb-8 uppercase">#{post.id} · User {post.userId}</div>
-            <h2 className="font-display font-500 text-3xl leading-tight text-ink-950 mb-8 capitalize">{post.title}</h2>
-            <p className="text-ink-800 text-base leading-loose font-light mb-12 border-l border-ink-600/20 pl-8">{post.body}</p>
+            <div className="font-mono text-[10px] tracking-[0.2em] text-[#8B6A3D] mb-8 uppercase">
+              #{post.id} · User {post.userId}
+            </div>
+
+            <h2 className="font-display font-500 text-3xl leading-tight text-[#8B6A3D] mb-8 capitalize">
+              {post.title}
+            </h2>
+
+            <p className="text-ink-800 text-base leading-loose font-light mb-12 border-l border-[#8B6A3D]/30 pl-8">
+              {post.body}
+            </p>
             
-            <div className="flex gap-8 border-t border-ink-600/10 pt-8">
-              <button onClick={() => setEditing(true)} className="text-[10px] uppercase tracking-widest text-ink-950 hover:text-volt transition-all font-semibold">Edit Entry</button>
-              <button onClick={handleDelete} disabled={deleting} className="text-[10px] uppercase tracking-widest text-ink-700 hover:text-rose-neon transition-all font-semibold">
+            <div className="flex gap-8 border-t border-[#8B6A3D]/20 pt-8">
+              <button 
+                onClick={() => setEditing(true)} 
+                className="text-[10px] uppercase tracking-widest text-[#8B6A3D] hover:text-[#6f532f] transition-all font-semibold"
+              >
+                Edit Entry
+              </button>
+
+              <button 
+                onClick={handleDelete} 
+                disabled={deleting} 
+                className="text-[10px] uppercase tracking-widest text-[#8B6A3D]/70 hover:text-red-500 transition-all font-semibold"
+              >
                 {deleting ? "Deleting..." : "Delete Entry"}
               </button>
             </div>
@@ -74,8 +102,14 @@ export default function PostDetail({ id, onClose }) {
 
         {!loading && !error && !deleted && post && editing && (
           <div className="animate-in slide-in-from-bottom-4 duration-500">
-            <h3 className="font-display text-xl mb-8">Edit Details</h3>
-            <PostForm post={post} onSuccess={updated => { setPost(updated); setEditing(false); }} onCancel={() => setEditing(false)} />
+            <h3 className="font-display text-xl mb-8 text-[#8B6A3D]">
+              Edit Details
+            </h3>
+            <PostForm 
+              post={post} 
+              onSuccess={updated => { setPost(updated); setEditing(false); }} 
+              onCancel={() => setEditing(false)} 
+            />
           </div>
         )}
       </div>
