@@ -23,28 +23,33 @@ export default function PostCard({ post, onView, onDeleted }) {
     const { data, error } = await api.patchPost(post.id, { title: post.title + " [patched]" });
     setPatching(false);
     if (error) { toast.error(error.message); return; }
-    toast.success(`PATCH OK — title updated on server (ID: ${data.id})`);
+    toast.success(`Update confirmed`);
   }
 
   return (
     <div
       onClick={() => onView(post.id)}
-      className="group bg-ink-800 border border-ink-600 rounded-xl p-5 cursor-pointer transition-all duration-200 hover:-translate-y-1 hover:border-volt/40 relative overflow-hidden"
+      className="group flex flex-col justify-between bg-white border border-ink-600/10 p-10 cursor-pointer transition-all duration-500 hover:shadow-[0_20px_50px_rgba(0,0,0,0.05)] hover:border-ink-600/30"
     >
-      {/* Top accent bar */}
-      <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-volt to-cyan-neon scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
+      <div>
+        <div className="font-mono text-[11px] tracking-[0.2em] text-ink-700 mb-6 uppercase">Entry • {post.id}</div>
+        {/* Increased to text-xl for authoritative reading */}
+        <h3 className="font-display font-500 text-xl leading-tight text-ink-950 mb-5 group-hover:text-volt transition-colors duration-300">
+          {post.title}
+        </h3>
+        {/* Increased to text-[15px] for premium legibility */}
+        <p className="text-[15px] text-ink-700 leading-relaxed line-clamp-3 font-light">
+          {post.body}
+        </p>
+      </div>
 
-      <div className="font-mono text-xs text-volt mb-2">#{post.id}</div>
-      <h3 className="font-display font-600 text-sm leading-snug mb-2 text-slate-200 line-clamp-2 capitalize">{post.title}</h3>
-      <p className="text-xs text-slate-500 leading-relaxed line-clamp-3">{post.body}</p>
-
-      <div className="flex gap-2 mt-4" onClick={e => e.stopPropagation()}>
-        <button onClick={() => onView(post.id)} className="flex-1 py-1.5 text-xs rounded-lg border border-ink-600 text-slate-400 hover:border-volt hover:text-volt transition-colors font-600">View</button>
-        <button onClick={handlePatch} disabled={patching} className="flex-1 py-1.5 text-xs rounded-lg border border-ink-600 text-slate-400 hover:border-cyan-400 hover:text-cyan-400 disabled:opacity-40 transition-colors font-600">
-          {patching ? "…" : "Patch"}
+      <div className="flex gap-8 mt-12 pt-8 border-t border-ink-600/5" onClick={e => e.stopPropagation()}>
+        <button onClick={() => onView(post.id)} className="text-[10px] uppercase tracking-widest text-ink-950 hover:text-volt transition-all font-semibold hover:border-b hover:border-volt">View</button>
+        <button onClick={handlePatch} disabled={patching} className="text-[10px] uppercase tracking-widest text-ink-700 hover:text-cyan-neon transition-all font-semibold hover:border-b hover:border-cyan-neon">
+          {patching ? "Updating..." : "Patch"}
         </button>
-        <button onClick={handleDelete} disabled={deleting} className="flex-1 py-1.5 text-xs rounded-lg border border-ink-600 text-slate-400 hover:border-rose-neon hover:text-rose-neon disabled:opacity-40 transition-colors font-600">
-          {deleting ? "…" : "Delete"}
+        <button onClick={handleDelete} disabled={deleting} className="text-[10px] uppercase tracking-widest text-ink-700 hover:text-rose-neon transition-all font-semibold hover:border-b hover:border-rose-neon">
+          {deleting ? "Deleting..." : "Delete"}
         </button>
       </div>
     </div>

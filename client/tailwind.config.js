@@ -3,42 +3,29 @@ export default {
   content: ["./index.html", "./src/**/*.{js,jsx}"],
   theme: {
     extend: {
+      // ADD THESE FOR PREMIUM TYPOGRAPHY
+      letterSpacing: {
+        widest: '0.25em',
+        tightest: '-0.02em',
+      },
       fontFamily: {
         display: ["'Syne'", "sans-serif"],
         mono: ["'DM Mono'", "monospace"],
       },
       colors: {
         ink: {
-          950: "#07070d",
-          900: "#0e0e18",
-          800: "#16161f",
-          700: "#1f1f2e",
-          600: "#2a2a3a",
+          950: "#0C0A09",
+          900: "#1C1917",
+          800: "#44403C",
+          700: "#A8A29E",
+          600: "#E7E5E4",
         },
-        volt: { DEFAULT: "#e8ff47", dark: "#c8df20" },
-        cyan: { neon: "#47ffe8" },
-        rose: { neon: "#ff4778" },
-        emerald: { neon: "#47ff8e" },
+        volt: { DEFAULT: "#CA8A04", dark: "#A16207" },
+        cyan: { neon: "#0F766E" },
+        rose: { neon: "#9F1239" },
+        emerald: { neon: "#15803D" },
       },
-      keyframes: {
-        shimmer: {
-          "0%": { backgroundPosition: "200% 0" },
-          "100%": { backgroundPosition: "-200% 0" },
-        },
-        fadeUp: {
-          "0%": { opacity: 0, transform: "translateY(8px)" },
-          "100%": { opacity: 1, transform: "translateY(0)" },
-        },
-        pulseDot: {
-          "0%,100%": { opacity: 1 },
-          "50%": { opacity: 0.3 },
-        },
-      },
-      animation: {
-        shimmer: "shimmer 1.6s infinite",
-        fadeUp: "fadeUp 0.25s ease forwards",
-        pulseDot: "pulseDot 2s infinite",
-      },
+      // ... keep your existing keyframes and animations
     },
   },
   plugins: [],

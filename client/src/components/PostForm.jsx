@@ -13,7 +13,7 @@ export default function PostForm({ post, onSuccess, onCancel }) {
   async function submit(e) {
     e.preventDefault();
     if (!title.trim() || !body.trim()) {
-      setError({ type: "validation", message: "Title and body are required." });
+      setError({ type: "validation", message: "Title and content required." });
       return;
     }
     setLoading(true); setError(null); setResult(null);
@@ -27,48 +27,51 @@ export default function PostForm({ post, onSuccess, onCancel }) {
   }
 
   return (
-    <div className="bg-ink-800 border border-ink-600 rounded-xl p-6 animate-fadeUp">
-      <h3 className="font-display font-700 text-lg mb-5">
-        {editing ? "✏️ Edit Post" : "✨ New Post"}
+    <div className="bg-[#FAFAF9] border border-ink-600/10 p-10 animate-in fade-in slide-in-from-bottom-4 duration-500">
+      <h3 className="font-display font-500 text-lg mb-10 text-ink-950 uppercase tracking-widest">
+        {editing ? "Edit Entry" : "Create New"}
       </h3>
 
       {result && (
-        <div className="mb-4 p-3 rounded-lg bg-emerald-neon/10 border border-emerald-neon/30 text-emerald-neon font-mono text-xs">
-          ✓ {editing ? "Updated" : "Created"} — ID: {result.id}
-          <pre className="mt-2 overflow-auto text-xs opacity-70">{JSON.stringify(result, null, 2)}</pre>
+        <div className="mb-10 p-6 bg-ink-950 text-emerald-neon font-mono text-[10px] uppercase tracking-widest">
+          {editing ? "Entry Updated" : "Entry Created"} · ID: {result.id}
         </div>
       )}
 
-      {error && <div className="mb-4"><ErrorState error={error} onRetry={() => setError(null)} /></div>}
+      {error && <div className="mb-8"><ErrorState error={error} onRetry={() => setError(null)} /></div>}
 
-      <form onSubmit={submit} className="flex flex-col gap-4">
-        <div>
-          <label className="block font-mono text-xs text-slate-400 mb-1.5">TITLE</label>
+      <form onSubmit={submit} className="flex flex-col gap-8">
+        <div className="group">
+          <label className="block font-mono text-[10px] uppercase tracking-[0.2em] text-ink-700 mb-2">Title</label>
           <input
             value={title} onChange={e => setTitle(e.target.value)}
-            placeholder="Post title…"
-            className="w-full bg-ink-700 border border-ink-600 rounded-lg px-4 py-2.5 text-sm font-mono text-slate-200 placeholder-slate-600 focus:outline-none focus:border-volt transition-colors"
+            className="w-full bg-transparent border-b border-ink-600/30 py-3 text-sm text-ink-950 placeholder-ink-600/50 focus:outline-none focus:border-volt transition-all"
+            placeholder="Name your post..."
           />
         </div>
-        <div>
-          <label className="block font-mono text-xs text-slate-400 mb-1.5">BODY</label>
+        <div className="group">
+          <label className="block font-mono text-[10px] uppercase tracking-[0.2em] text-ink-700 mb-2">Content</label>
           <textarea
             value={body} onChange={e => setBody(e.target.value)}
-            rows={4} placeholder="Post body…"
-            className="w-full bg-ink-700 border border-ink-600 rounded-lg px-4 py-2.5 text-sm font-mono text-slate-200 placeholder-slate-600 focus:outline-none focus:border-volt transition-colors resize-none"
+            rows={4} 
+            className="w-full bg-transparent border-b border-ink-600/30 py-3 text-sm text-ink-950 placeholder-ink-600/50 focus:outline-none focus:border-volt transition-all resize-none"
+            placeholder="Write your story..."
           />
         </div>
-        <div className="flex gap-3">
+        
+        <div className="flex items-center gap-8 mt-4">
           <button
             type="submit" disabled={loading}
-            className="flex-1 py-2.5 bg-volt text-ink-950 font-display font-700 text-sm rounded-lg hover:bg-volt-dark disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+            className="text-[10px] uppercase tracking-widest text-ink-950 hover:text-volt transition-all font-bold"
           >
-            {loading ? "⏳ Saving…" : editing ? "Save Changes" : "Create Post"}
+            {loading ? "Processing..." : "Confirm & Save"}
           </button>
           {onCancel && (
             <button type="button" onClick={onCancel}
-              className="px-4 py-2.5 border border-ink-600 rounded-lg text-slate-400 text-sm hover:border-slate-400 transition-colors"
-            >Cancel</button>
+              className="text-[10px] uppercase tracking-widest text-ink-700 hover:text-ink-950 transition-all"
+            >
+              Cancel
+            </button>
           )}
         </div>
       </form>
