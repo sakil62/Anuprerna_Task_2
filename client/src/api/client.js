@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useChaosStore } from "../store/chaosStore";
 
-const BASE_URL = "http://localhost:4000/api";
+const BASE_URL = "https://anuprerna-task-2-npd6-neon.vercel.app/api";
 const TIMEOUT_MS = 5000;
 
 function getChaosParams() {
