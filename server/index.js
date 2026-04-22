@@ -5,7 +5,9 @@ const postsRouter = require("./routes/posts");
 const app = express();
 const PORT = 4000;
 
-app.use(cors());
+app.use(cors({
+  origin: ['https://anuprerna-task-2.vercel.app', 'http://localhost:5173']
+}));
 app.use(express.json());
 
 app.use("/api/posts", postsRouter);
